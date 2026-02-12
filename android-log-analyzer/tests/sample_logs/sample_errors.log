@@ -1,0 +1,62 @@
+# Sample critical errors log for testing
+# Contains various error conditions
+
+01-20 10:00:00.000  1000  1000 I SystemServer: Boot started
+01-20 10:00:01.000  2000  2000 I CarService: CarService starting
+
+# ANR detection
+01-20 10:05:00.000  1000  1100 E ActivityManager: ANR in com.example.heavyapp
+01-20 10:05:00.001  1000  1100 E ActivityManager: PID: 5000
+01-20 10:05:00.002  1000  1100 E ActivityManager: Reason: Input dispatching timed out
+01-20 10:05:00.003  1000  1100 E ActivityManager: Load: 4.5 / 3.2 / 2.1
+
+# Native crash
+01-20 10:10:00.000  5001  5001 F DEBUG: *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+01-20 10:10:00.001  5001  5001 F DEBUG: Build fingerprint: 'Android/automotive/generic:15.0'
+01-20 10:10:00.002  5001  5001 F DEBUG: Abort message: 'SIGSEGV in native code'
+01-20 10:10:00.003  5001  5001 F DEBUG: pid: 5001, tid: 5001, name: native_crash_app
+01-20 10:10:00.004  5001  5001 F DEBUG: signal 11 (SIGSEGV), code 1 (SEGV_MAPERR)
+
+# CAN bus critical error
+01-20 10:15:00.000  2000  2010 E CanBusService: CAN bus error: BUSOFF state detected
+01-20 10:15:00.100  2000  2010 E SocketCAN: Controller entered bus-off state
+01-20 10:15:00.200  2000  2010 E CanBusService: CAN communication lost with ECU 0x7E0
+01-20 10:15:01.000  2000  2010 W CanBusService: Attempting CAN bus recovery...
+
+# Vehicle HAL crash
+01-20 10:20:00.000  2000  2001 E VehicleHal: Vehicle HAL service died unexpectedly
+01-20 10:20:00.100  2000  2000 E CarService: Critical error: VHAL connection lost
+01-20 10:20:00.200  1000  1000 E ServiceManager: Service 'android.hardware.automotive.vehicle@2.0' died
+
+# Out of memory
+01-20 10:25:00.000  6000  6000 E dalvikvm: OutOfMemoryError thrown
+01-20 10:25:00.001  1000  1001 E ActivityManager: Low on memory, killing background processes
+01-20 10:25:00.002  1000  1001 W lowmemorykiller: Killing 'com.background.app' (pid 7000)
+
+# Car Watchdog timeout
+01-20 10:30:00.000  2000  2050 E CarWatchdogService: Process com.slow.service is unresponsive
+01-20 10:30:00.100  2000  2050 E CarWatchdog: Timeout waiting for health check response
+01-20 10:30:00.200  2000  2050 W CarWatchdogService: Terminating unresponsive process
+
+# Cluster disconnect
+01-20 10:35:00.000  2000  2004 E ClusterHomeService: Cluster display disconnected unexpectedly
+01-20 10:35:00.100  2000  2004 E InstrumentClusterService: Cluster communication failed
+01-20 10:35:00.200  2000  2004 W ClusterRenderingService: Unable to render - display unavailable
+
+# Power management failure
+01-20 10:40:00.000  2000  2002 E CarPowerManagement: Power state transition failed
+01-20 10:40:00.100  2000  2002 E CarPowerManagement: Unable to enter deep sleep - wakelock held
+01-20 10:40:00.200  2000  2002 W SuspendControl: Suspend aborted: active wakelocks detected
+
+# Java exception
+01-20 10:45:00.000  8000  8000 E AndroidRuntime: FATAL EXCEPTION: main
+01-20 10:45:00.001  8000  8000 E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke virtual method on null object
+01-20 10:45:00.002  8000  8000 E AndroidRuntime:     at com.example.app.MainActivity.onCreate(MainActivity.java:42)
+
+# EVS camera error
+01-20 10:50:00.000  2000  2060 E EvsManager: Camera device disconnected: rearview_camera
+01-20 10:50:00.100  2000  2060 E CarEvsService: EVS stream failed - camera unavailable
+01-20 10:50:00.200  2000  2060 W EvsService: Rearview camera feed interrupted
+
+# End of sample
+01-20 11:00:00.000  1000  1000 I SystemServer: Error log sample complete

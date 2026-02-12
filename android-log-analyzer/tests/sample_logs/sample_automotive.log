@@ -1,0 +1,61 @@
+# Sample Android Automotive logcat output for testing
+# Format: MM-DD HH:MM:SS.mmm PID TID LEVEL TAG: MESSAGE
+
+01-15 08:00:00.001  1000  1000 I SystemServer: Starting services...
+01-15 08:00:00.050  1000  1000 I PackageManager: Package manager initialized
+01-15 08:00:00.100  1000  1001 I ActivityManager: System ready
+01-15 08:00:00.150  2000  2000 I CarService: CarService starting...
+01-15 08:00:00.200  2000  2001 I VehicleHal: Connecting to Vehicle HAL
+01-15 08:00:00.250  2000  2001 I VehicleHal: Vehicle HAL connected successfully
+01-15 08:00:00.300  2000  2002 I CarPowerManagement: Power state: ON
+01-15 08:00:00.350  2000  2003 I CarAudioService: Initializing audio zones
+01-15 08:00:00.400  2000  2003 I CarAudioZone: Primary zone configured
+01-15 08:00:00.450  2000  2004 I ClusterHomeService: Cluster service starting
+01-15 08:00:00.500  2000  2004 I ClusterRenderingService: Cluster display connected
+01-15 08:00:01.000  3000  3000 I CarLauncher: Launcher started
+01-15 08:00:01.500  3001  3001 I CarMediaService: Media service ready
+01-15 08:00:02.000  1000  1000 I ActivityManager: Boot completed
+
+# Normal vehicle operations
+01-15 08:01:00.000  2000  2005 D VehicleHal: Property PERF_VEHICLE_SPEED = 0.0
+01-15 08:01:00.100  2000  2005 D VehicleHal: Property ENGINE_RPM = 850
+01-15 08:01:00.200  2000  2005 D VehicleHal: Property FUEL_LEVEL = 75.5
+01-15 08:01:01.000  2000  2005 D VehicleHal: Property PERF_VEHICLE_SPEED = 25.0
+01-15 08:01:02.000  2000  2005 D VehicleHal: Property PERF_VEHICLE_SPEED = 50.0
+
+# Audio focus request
+01-15 08:02:00.000  4000  4000 I CarAudioService: Audio focus request from com.android.car.radio
+01-15 08:02:00.050  4000  4001 D CarAudioFocus: Granting GAIN to com.android.car.radio
+
+# Simulated Vehicle HAL error
+01-15 08:05:00.000  2000  2001 E VehicleHal: Error reading property HVAC_TEMPERATURE_SET: timeout
+01-15 08:05:00.100  2000  2001 W VehicleService: Retrying property read...
+01-15 08:05:01.000  2000  2001 E VehicleHal: VHAL property read failed after 3 retries
+
+# CAN bus warning
+01-15 08:06:00.000  2000  2010 W CanBusService: CAN message queue overflow warning
+01-15 08:06:00.100  2000  2010 W SocketCAN: High bus load detected: 85%
+
+# Power state change
+01-15 08:10:00.000  2000  2002 I CarPowerManagement: Power state transition: ON -> WAIT_FOR_VHAL
+01-15 08:10:00.500  2000  2002 I CarPowerManagement: Power state transition: WAIT_FOR_VHAL -> SHUTDOWN_PREPARE
+01-15 08:10:01.000  2000  2002 I GarageModeService: Entering garage mode
+
+# Audio focus conflict
+01-15 08:15:00.000  5000  5000 I Navigation: Navigation started
+01-15 08:15:00.050  5000  5001 I CarAudioService: Audio focus request from com.android.car.navigation
+01-15 08:15:00.100  4000  4001 W CarAudioFocus: Audio focus conflict: radio vs navigation
+01-15 08:15:00.150  4000  4001 I CarAudioFocus: Duck granted to navigation
+
+# Cluster rendering issue
+01-15 08:20:00.000  2000  2004 W ClusterRenderingService: Frame drop detected
+01-15 08:20:00.500  2000  2004 W ClusterRenderingService: Frame drop detected
+01-15 08:20:01.000  2000  2004 E ClusterRenderingService: Cluster render timeout - display may be unresponsive
+
+# Normal shutdown
+01-15 08:30:00.000  2000  2002 I CarPowerManagement: Shutdown requested
+01-15 08:30:00.100  2000  2003 I CarAudioService: Releasing audio resources
+01-15 08:30:00.200  2000  2004 I ClusterHomeService: Cluster disconnected
+01-15 08:30:00.300  2000  2001 I VehicleHal: Disconnecting from Vehicle HAL
+01-15 08:30:00.400  2000  2000 I CarService: CarService stopped
+01-15 08:30:00.500  1000  1000 I SystemServer: System shutdown complete

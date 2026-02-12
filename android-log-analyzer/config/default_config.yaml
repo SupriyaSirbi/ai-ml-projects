@@ -1,0 +1,80 @@
+# Android Automotive Log Analyzer - Default Configuration
+
+# Parser settings
+default_year: 2026
+log_file_patterns:
+  - "*.log"
+  - "*.txt"
+  - "logcat*"
+  - "dmesg*"
+
+# Analysis settings
+min_severity: info  # info, warning, error, critical
+enable_automotive_analysis: true
+error_cluster_window_seconds: 60
+min_cluster_size: 3
+
+# Report settings
+max_sample_messages: 5
+max_top_tags: 20
+timeline_bucket_minutes: 5
+
+# Automotive tag categories for monitoring
+automotive_tags:
+  vehicle:
+    - vehicle_hal
+    - VehicleService
+    - CarService
+    - VehicleHal
+    - VehicleNetworkService
+  power:
+    - CarPowerManagement
+    - PowerManagerService
+    - CarPowerManagerService
+    - GarageModeService
+    - SuspendControl
+  audio:
+    - CarAudioService
+    - AudioFlinger
+    - CarAudioFocus
+    - CarAudioZone
+    - AudioService
+  media:
+    - CarMediaService
+    - MediaSession
+    - CarMediaBrowseService
+  cluster:
+    - ClusterHomeService
+    - ClusterRenderingService
+    - InstrumentClusterService
+  navigation:
+    - CarNavigationService
+    - GnssLocationProvider
+    - LocationManager
+  input:
+    - CarInputService
+    - RotaryService
+    - InputDispatcher
+    - CarInputManager
+  connectivity:
+    - CarBluetoothService
+    - CarWifiService
+    - CarTelemetryService
+  evs:
+    - EvsManager
+    - EvsService
+    - CarEvsService
+  can:
+    - CanBusService
+    - SocketCAN
+    - CanController
+
+# Custom pattern rules (optional)
+# Format:
+#   - name: pattern_name
+#     regex: "pattern.*to.*match"
+#     tags: [Tag1, Tag2]
+#     severity: warning  # info, warning, error, critical
+#     description: "Human readable description"
+#     recommendation: "What to do about it"
+custom_patterns: []
